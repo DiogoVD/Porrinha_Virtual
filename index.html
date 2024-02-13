@@ -11,28 +11,23 @@
     <div class="container">
         <h2>Porrinha Cachaça</h2>
         <div class="config_container">
-            <div class="players">
-                <span >Jogador</span><input type="text"><br>
-                <button type="button">+</button>
-            </div>
-            <span>N° de palpites</span><input type="number"><br>
-            <span>N° de palitos</span><input type="number"><br>
+            <span >N° de Jogadores</span><input id="n_players" type="number"><br>
+            <span>N° de palitos</span><input id="n_palitos" type="number"><br>
+            <button id="btn_start" onclick="config_porrinha()" type="button">Iniciar</button>
         </div>
-        <!-- <div class="palpites container">
-            <h3>Nome Jogador</h3>
-            <div class="palpite">
-                <div class="palitos">
-                    <span>palitos</span><input type="number">
+        <div class="palpites_container">
+            <div class="palpites">
+                <div class="palpites_player">
+                    <h3>Nome Jogador</h3><br>
+                    <span>palitos</span><input type="number"><br>
+                    <span>palpite</span><input type="number">
                 </div>
-                <div class="chute">
-                    <span>chute</span><input type="number">
+                <div class="lista_palpite">
+                    <span>Nome: palpite</span>
                 </div>
             </div>
-            <div class="lista_palpite">
-                <span>Nome: chute</span>
-            </div>
-        </div> -->
-
+            <button id="btn_next" type="button">Próximo</button>
+        </div>
     </div>
 
 

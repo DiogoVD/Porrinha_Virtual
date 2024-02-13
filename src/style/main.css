@@ -1,3 +1,6 @@
+
+/* Tela 1 */
+
 .container{
     width: 100vw;
     height: 100vh;
@@ -18,15 +21,60 @@
     align-items: center;
 }
 
-.players > button{
-    width: 20px;
-    height: 20px;
+button{
+    width: 150px;
+    height: 25px;
+    text-align: center;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+span{
+    margin: 5px;
+    color: black;
+    text-transform: capitalize;
+}
+
+input{
+    width: 50px;
+    height: 25px;
+    background-color: white;
     text-align: center;
 }
 
-.palpites container{
+/* tela 2 */
+
+.palpites_container{
     display: flex;
-    flex-direction:row;
-    justify-content: center;
-    visibility: hidden;
+    flex-direction: column;
+    align-items: center;
+}
+
+.palpites_container >button{
+    margin-top: 20px;
+}
+
+.palpites{
+    display: flex;
+    flex-direction: row;
+}
+
+.palpites_player{
+    width: 150px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.palpites_player > h3{
+    color: blueviolet;
+}
+
+.lista_palpite{
+    width: 150px;
+    margin-left: 50px;
+    border: 1px solid red;
+    text-align: left;
 }
