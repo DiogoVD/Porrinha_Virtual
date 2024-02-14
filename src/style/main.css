@@ -83,6 +83,6 @@ input{
 .lista_palpite{
     width: 150px;
     margin-left: 50px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     text-align: left;
 }
