@@ -83,6 +83,28 @@ input{
 .lista_palpite{
     width: 150px;
     margin-left: 50px;
-    /* border: 1px solid red; */
+    border: 1px solid red;
     text-align: left;
+}
+
+/* Tela 3 Resultado */
+
+.result_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.resultado{
+    display: flex;
+    flex-direction: row;
+}
+
+.player_title{
+    display: flex;
+    width: 150px;
+    height: 180px;
+    border: 1px solid red;
+    justify-content: center;
+    align-items: center;
+
 }

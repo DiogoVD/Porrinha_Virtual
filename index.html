@@ -11,8 +11,8 @@
     <div class="container">
         <h2>Porrinha Cachaça</h2>
         <div class="config_container" id="config">
-            <span >N° de Jogadores</span><input id="n_players" type="number"><br>
-            <span>N° de palitos</span><input id="n_palitos" type="number"><br>
+            <span >N° de Jogadores</span><input id="n_players" type="number" value="2"><br>
+            <span>N° de palitos</span><input id="n_palitos" type="number" value="3"><br>
             <button id="btn_start" onclick="config_porrinha()" type="button">Iniciar</button>
         </div>
 
@@ -28,6 +28,19 @@
                 </div>
             </div>
             <button id="btn_next" type="button" onclick="capturaDados()">Próximo</button>
+            <button id="btn_result" type="button" onclick="exibeResult()">Resultado</button>
+        </div>
+
+        <div class="result_container" id="res">
+                <div class="resultado">
+                    <div class="player_title" id="title">
+                        
+                    </div>
+                    <div class="lista_palpite" id="list_result">
+                        
+                    </div>
+                </div>
+                <button id="btn_continua" type="button" onclick="">Continuar</button>
         </div>
     </div>
 
