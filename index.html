@@ -11,8 +11,8 @@
     <div class="container">
         <h2>Porrinha Cachaça</h2>
         <div class="config_container" id="config">
-            <span >N° de Jogadores</span><input id="n_players" type="number" value="2"><br>
-            <span>N° de palitos</span><input id="n_palitos" type="number" value="3"><br>
+            <span >N° de Jogadores</span><input id="n_players" type="number" value="2" min="2" max="15" step="1"><br>
+            <span>N° de palitos</span><input id="n_palitos" type="number" value="3" min="3" max="10" step="1"><br>
             <button id="btn_start" onclick="config_porrinha()" type="button">Iniciar</button>
         </div>
 
@@ -20,15 +20,16 @@
             <div class="palpites">
                 <div class="palpites_player">
                     <h3 id="player_name">Nome Jogador</h3><br>
-                    <span>palitos</span><input type="number" id="player_palito"><br>
-                    <span>palpite</span><input type="number" id="player_palpite">
+                    <span id="set_palito">palitos<br><input type="number" id="player_palito" min="0"></span>
+                    <span id="set_palpite">palpite<br><input type="number" id="player_palpite" min="0"></span>
+                    <button id="btn_result" type="button" onclick="exibeResult()">Resultado</button>
                 </div>
                 <div class="lista_palpite" id="list_palp">
                     
                 </div>
             </div>
+            <button id="btn_palpite" type="button" onclick="proximoPalpite()">Palpite</button>
             <button id="btn_next" type="button" onclick="capturaDados()">Próximo</button>
-            <button id="btn_result" type="button" onclick="exibeResult()">Resultado</button>
         </div>
 
         <div class="result_container" id="res">
@@ -40,7 +41,7 @@
                         
                     </div>
                 </div>
-                <button id="btn_continua" type="button" onclick="">Continuar</button>
+                <button id="btn_continua" type="button" onclick="reiniciaRodada()">Continuar</button>
         </div>
     </div>
 
