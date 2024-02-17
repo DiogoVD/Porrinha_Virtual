@@ -93,7 +93,7 @@ function exibeResult(){
         soma_dos_palitos += parseInt(y.palito);
     });
 
-    state.views.lista_palp_result.innerHTML = "|    nome   | palitos | palpite |<br>";
+    state.views.lista_palp_result.innerHTML = "|   nome  | palitos | palpite |<br>";
     jogadores.forEach((x) =>{
         state.views.lista_palp_result.innerHTML += `|  ${x.nome}  |  ${x.palito}  |  ${x.palpite}  |<br>`
         if(parseInt(x.palpite) === soma_dos_palitos){
@@ -175,7 +175,7 @@ function proximoPalpite(){
 
 
 function carregaNomesPalpites(monstraPalpite){
-    state.views.lista.innerHTML = "|    nome   | palitos | palpite |<br>";
+    state.views.lista.innerHTML = "|   nome  | palitos | palpite |<br>";
     if(monstraPalpite === "sim"){
         jogadores.forEach((x) =>{       // players >>> jogadores
             state.views.lista.innerHTML += `|  ${x.nome}  |  --  |  ${x.palpite}  | <br>`
