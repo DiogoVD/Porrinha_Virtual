@@ -26,9 +26,9 @@ const state = {
 }
 
 let players = [];
-let palitos = [];
+let palitos = [];//
 let palitos_ver = [];
-let palpites = [];
+let palpites = [];//
 let palpites_ver =[];
 
 let nJogadores = 2;
@@ -213,3 +213,28 @@ Init()
 // - apenas exibir o palpite apos escolha dos palitos.
 // - o ultimo bebe
 // - quem acerta sai da rodada
+
+
+
+// let jogadores = [];
+
+// function player(nome, palito, palpite){
+//   this.nome = nome;
+//   this.palito = palito;
+//   this.palpite = palpite;
+// }
+
+// jogadores.push(new player("Diogo",2,3));
+// jogadores.push(new player("Felipe",4,4));
+// jogadores.push(new player("Ronaldo",4,4));
+
+
+
+// // Update header text
+// document.querySelector('#header').innerHTML = message
+
+// // Log to console
+// console.log(jogadores[0].nome);
+// console.log(jogadores);
+// jogadores.splice(0,2);
+// console.log(jogadores);
