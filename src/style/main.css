@@ -53,6 +53,7 @@ input{
 
 .palpites_container >button{
     margin-top: 20px;
+    
 }
 
 .palpites{
@@ -67,6 +68,8 @@ input{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-top: 10px solid rgba(218, 165, 32, 0.5);
+    border-bottom: 10px solid rgba(218, 165, 32, 0.5)
 }
 
 .palpites_player > h3{
@@ -74,9 +77,16 @@ input{
 }
 
 .lista_palpite{
-    width: 150px;
+    display: flex;
+    max-width: 200px;
     margin-left: 50px;
-    text-align: left;
+    text-align: justify;
+    align-items: center;
+    text-transform: capitalize;
+
+    border-top: 10px solid rgba(218, 165, 32, 0.5);
+    border-bottom: 10px solid rgba(218, 165, 32, 0.5);
+
 }
 
 /* Tela 3 Resultado */

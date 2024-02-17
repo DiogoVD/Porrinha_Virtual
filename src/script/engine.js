@@ -93,7 +93,7 @@ function exibeResult(){
         soma_dos_palitos += parseInt(y.palito);
     });
 
-    state.views.lista_palp_result.innerHTML = "";
+    state.views.lista_palp_result.innerHTML = "|    nome   | palitos | palpite |<br>";
     jogadores.forEach((x) =>{
         state.views.lista_palp_result.innerHTML += `|  ${x.nome}  |  ${x.palito}  |  ${x.palpite}  |<br>`
         if(parseInt(x.palpite) === soma_dos_palitos){
@@ -175,15 +175,15 @@ function proximoPalpite(){
 
 
 function carregaNomesPalpites(monstraPalpite){
-    state.views.lista.innerHTML = "";
+    state.views.lista.innerHTML = "|    nome   | palitos | palpite |<br>";
     if(monstraPalpite === "sim"){
         jogadores.forEach((x) =>{       // players >>> jogadores
-            state.views.lista.innerHTML += `|  ${x.nome}  |  ${x.palpite}  | <br>`
+            state.views.lista.innerHTML += `|  ${x.nome}  |  --  |  ${x.palpite}  | <br>`
         });
     }
     if(monstraPalpite === "nao"){
         jogadores.forEach((x) =>{
-            state.views.lista.innerHTML += `|  ${x.nome}  |  --  | <br>`
+            state.views.lista.innerHTML += `|  ${x.nome}  |  --  |  --  | <br>`
         });
     }
 }
@@ -204,10 +204,25 @@ function capturaNomes(num_jogadores){
     
     for(let i = 0; i<num_jogadores; i++){
         let nomePlayer = prompt(`Informe o nome do jogador ${i+1}.`)
-        if(nomePlayer === ""){
-            nomePlayer = `Jogador ${i+1}`
+        if(nomePlayer === null){
+            if(confirm("Deseja voltar a tela anterior?") ===true){
+                i = num_jogadores;
+                location.reload();
+            }else{
+                nomePlayer = prompt(`Informe o nome do jogador ${i+1}.`)
+                if(nomePlayer === null){
+                    alert("O jogo será reiniciado")
+                    i = num_jogadores;
+                    location.reload();
+                }
+            }
+        }else{
+            if(nomePlayer === ""){
+                nomePlayer = `Jogador ${i+1}`
+            }
+            players.push(nomePlayer);
         }
-        players.push(nomePlayer);
+        
     }
 }
 
@@ -221,8 +236,9 @@ function config_porrinha(){
         nPalitos = state.values.n_palitos.value;
 
         capturaNomes(nJogadores);
-
+        
         carregaTelaPalitos();
+
     }
 }
 
