@@ -80,7 +80,7 @@ input{
 .lista_palpite{
     display: flex;
     max-width: 200px;
-    margin-left: 50px;
+    margin-left: 45px;
     text-align: justify;
     align-items: center;
     text-transform: capitalize;
