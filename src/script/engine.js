@@ -9,7 +9,8 @@ const state = {
     telas: {
         tela1: document.getElementById("config"),
         tela2: document.getElementById("palp"),
-        telaRes: document.getElementById("res")
+        telaRes: document.getElementById("res"),
+        telaCamp: document.getElementById("camp")
     },
 
     views: {
@@ -21,14 +22,14 @@ const state = {
         vencedor_rodada: document.querySelector("#title"),
         set_palito: document.querySelector("#set_palito"),
         set_palpite: document.querySelector("#set_palpite"),
-        palpite_btn: document.querySelector("#btn_palpite")
+        palpite_btn: document.querySelector("#btn_palpite"),
+        beboRodada: document.querySelector("#beboRodada"),
+        reiniciar_btn: document.querySelector("#btn_reiniciar")
     }
 }
 
 let players = [];
-let palitos = [];//
-let palitos_ver = [];
-let palpites = [];//
+let jogadores = [];
 let palpites_ver =[];
 
 let nJogadores = 2;
@@ -38,65 +39,86 @@ let ganhadorRodada;
 let soma_dos_palitos = 0;
 
 
+function player(nome, palito, palpite){
+  this.nome = nome;
+  this.palito = palito;
+  this.palpite = palpite;
+};
+
+
+function telaVencedor(){
+    state.telas.tela1.style.display = "none";
+    state.telas.tela2.style.display = "none";
+    state.telas.telaRes.style.display = "none";
+    state.telas.telaCamp.style.display = "block";
+
+    state.views.beboRodada.innerHTML = `${players[0]} <br> é hora de beber!!!`
+    
+}
+
 
 function reiniciaRodada(){
     let indice = players.indexOf(ganhadorRodada);
 
-    console.log(players);
-    console.log(palitos);
-    console.log(palitos_ver);
-    console.log(palpites);
-    console.log(palpites_ver);
+    players.splice(indice,1); // remove ganhador
 
-    players.splice(indice,1);
-    // palitos.splice(indice,1);
-    palitos_ver.splice(indice,1);
-    // palpites.splice(indice,1);
-    palpites_ver.splice(indice,1);
+    jogadores = [];
+    palpites_ver =[];
+    contador = 0;
+    ganhadorRodada = "";
+    soma_dos_palitos = 0;
 
-    console.log(players);
-    console.log(palitos);
-    console.log(palitos_ver);
-    console.log(palpites);
-    console.log(palpites_ver);
+    if(players.length > 1){
+        state.telas.telaRes.style.display = "none";
+
+        state.telas.tela2.style.display = "block";
+        state.views.nomeJogador.style.display = "block";
+        state.views.set_palito.style.display = "block";
+        state.views.palpite_btn.style.display = "block";
+
+        carregaTelaPalitos();
+        
+    }else{
+        telaVencedor();
+
+    }
+
 }
-
 
 function exibeResult(){
     state.telas.tela2.style.display = "none";
     state.telas.telaRes.style.display = "block";
 
-    soma_dos_palitos = palitos_ver.reduce((a,b) => a + b);
-    console.log(soma_dos_palitos);
-
-    state.views.lista_palp_result.innerHTML = "";
-    players.forEach((x) =>{
-        state.views.lista_palp_result.innerHTML += `|  ${x}  |  ${palpites[x]}  |  ${palitos[x]}  |<br>`
-        if(parseInt(palpites[x]) === soma_dos_palitos){
-            state.views.vencedor_rodada.innerHTML = `${x}<br>Ganhou a rodada`;
-            ganhadorRodada = x;
-        }
+    jogadores.forEach((y) => {
+        soma_dos_palitos += parseInt(y.palito);
     });
 
+    state.views.lista_palp_result.innerHTML = "";
+    jogadores.forEach((x) =>{
+        state.views.lista_palp_result.innerHTML += `|  ${x.nome}  |  ${x.palito}  |  ${x.palpite}  |<br>`
+        if(parseInt(x.palpite) === soma_dos_palitos){
+            state.views.vencedor_rodada.innerHTML = `${x.nome}<br>Ganhou a rodada`;
+            ganhadorRodada = x.nome;
+        }
+    });
 }
 
 
 function capturaDados(){
-    if(palpites_ver.includes(state.values.Jog_palpite.value)===true){
+    if(palpites_ver.includes(state.values.Jog_palpite.value) === true){
         alert("Palpite ja foi registrado. Informe um novo palpite!!")
         state.values.Jog_palpite.value = "";
 
     }else{
-        palpites[players[contador]] = state.values.Jog_palpite.value;
-        palitos[players[contador]] = state.values.jog_palitos.value;
-        palitos_ver.push(parseInt(state.values.jog_palitos.value));
+        jogadores.push(new player(players[contador],state.values.jog_palitos.value, state.values.Jog_palpite.value));
         palpites_ver.push(state.values.Jog_palpite.value)
 
         proximoJogador();
 
-        if(contador<(players.length -1)){
+        if(contador<(players.length-1)){
             contador++;
             state.views.nomeJogador.innerHTML = players[contador];
+
         }else{
             state.views.proximo_btn.style.display = "none";
             state.views.resultado_btn.style.display = "block";
@@ -111,7 +133,7 @@ function capturaDados(){
 }
 function proximoJogador(){
 
-    if(state.values.Jog_palpite.value >=0 && state.values.Jog_palpite.value !==""){
+    if(state.values.Jog_palpite.value >= 0 && state.values.Jog_palpite.value !== "" ){
 
         state.values.Jog_palpite.value = "";
         state.values.jog_palitos.value = "";
@@ -137,29 +159,46 @@ function proximoPalpite(){
         state.views.set_palpite.style.display = "block";
         state.views.proximo_btn.style.display = "block";
         state.views.palpite_btn.style.display = "none";
-        carregaNomesPalpites("sim");
+        // console.log(jogadores.length)
+        if(jogadores.length === 0){
+            carregaNomesPalpites("nao");
+            
+        }else{
+            carregaNomesPalpites("sim");
+        }
 
     }else{
         state.values.jog_palitos.value = "";
         alert(`Informe um número entre 0 e ${state.values.n_palitos.value}`);
     }
-
 }
 
 
 function carregaNomesPalpites(monstraPalpite){
     state.views.lista.innerHTML = "";
     if(monstraPalpite === "sim"){
-        players.forEach((x) =>{
-            state.views.lista.innerHTML += `| ${x} >> ${palpites[x]} << <br>`
+        jogadores.forEach((x) =>{       // players >>> jogadores
+            state.views.lista.innerHTML += `|  ${x.nome}  |  ${x.palpite}  | <br>`
         });
     }
     if(monstraPalpite === "nao"){
-        players.forEach((x) =>{
-            state.views.lista.innerHTML += `| ${x} >> -- << <br>`
+        jogadores.forEach((x) =>{
+            state.views.lista.innerHTML += `|  ${x.nome}  |  --  | <br>`
         });
     }
 }
+
+function carregaTelaPalitos(){
+    state.telas.tela1.style.display = "none";
+    state.telas.tela2.style.display = "block";
+    state.views.resultado_btn.style.display = "none";
+    state.views.set_palpite.style.display = "none";
+    state.views.proximo_btn.style.display = "none";
+
+    carregaNomesPalpites("nao");
+    state.views.nomeJogador.innerHTML = players[contador];
+}
+
 
 function capturaNomes(num_jogadores){
     
@@ -169,7 +208,6 @@ function capturaNomes(num_jogadores){
             nomePlayer = `Jogador ${i+1}`
         }
         players.push(nomePlayer);
-        palpites[players[i]] = 0;
     }
 }
 
@@ -184,23 +222,16 @@ function config_porrinha(){
 
         capturaNomes(nJogadores);
 
-        state.telas.tela1.style.display = "none";
-        state.telas.tela2.style.display = "block";
-        state.views.resultado_btn.style.display = "none";
-        state.views.set_palpite.style.display = "none";
-        state.views.proximo_btn.style.display = "none";
-
-        
-        carregaNomesPalpites("nao");
-        state.views.nomeJogador.innerHTML = players[contador];
+        carregaTelaPalitos();
     }
-    
 }
 
 function Init(){
     state.telas.tela2.style.display = "none";
     state.telas.telaRes.style.display = "none";
     state.views.resultado_btn.style.display = "none";
+    state.telas.telaCamp.style.display = "none";
+
 }
 
 Init()
@@ -215,26 +246,3 @@ Init()
 // - quem acerta sai da rodada
 
 
-
-// let jogadores = [];
-
-// function player(nome, palito, palpite){
-//   this.nome = nome;
-//   this.palito = palito;
-//   this.palpite = palpite;
-// }
-
-// jogadores.push(new player("Diogo",2,3));
-// jogadores.push(new player("Felipe",4,4));
-// jogadores.push(new player("Ronaldo",4,4));
-
-
-
-// // Update header text
-// document.querySelector('#header').innerHTML = message
-
-// // Log to console
-// console.log(jogadores[0].nome);
-// console.log(jogadores);
-// jogadores.splice(0,2);
-// console.log(jogadores);
