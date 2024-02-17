@@ -205,17 +205,19 @@ function capturaNomes(num_jogadores){
     for(let i = 0; i<num_jogadores; i++){
         let nomePlayer = prompt(`Informe o nome do jogador ${i+1}.`)
         if(nomePlayer === null){
-            if(confirm("Deseja voltar a tela anterior?") ===true){
-                i = num_jogadores;
-                location.reload();
-            }else{
-                nomePlayer = prompt(`Informe o nome do jogador ${i+1}.`)
-                if(nomePlayer === null){
-                    alert("O jogo será reiniciado")
-                    i = num_jogadores;
-                    location.reload();
-                }
-            }
+            // if(confirm("Deseja voltar a tela anterior?") ===true){
+            //     i = num_jogadores;
+            //     location.reload();
+            // }else{
+            //     nomePlayer = prompt(`Informe o nome do jogador ${i+1}.`)
+            //     if(nomePlayer === null){
+            //         alert("O jogo será reiniciado")
+            //         i = num_jogadores;
+            //         location.reload();
+            //     }
+            // }
+
+            location.reload();
         }else{
             if(nomePlayer === ""){
                 nomePlayer = `Jogador ${i+1}`

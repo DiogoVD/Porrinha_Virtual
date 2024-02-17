@@ -24,8 +24,9 @@
 
 button{
     width: 150px;
-    height: 25px;
+    height: 30px;
     text-align: center;
+    font-size: 1.2rem;
     background-color: rgba(128, 128, 128, 0.5);
 }
 
@@ -97,6 +98,10 @@ input{
     align-items: center;
 }
 
+.result_container > button{
+    margin-top: 20px;
+}
+
 .resultado{
     display: flex;
     flex-direction: row;
@@ -108,6 +113,9 @@ input{
     height: 180px;
     justify-content: center;
     align-items: center;
+
+    border-top: 10px solid rgba(218, 165, 32, 0.5);
+    border-bottom: 10px solid rgba(218, 165, 32, 0.5);
 
 }
 
