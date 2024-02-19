@@ -35,7 +35,7 @@ let palpites_ver =[];
 let nJogadores = 2;
 let nPalitos = 3;
 let contador = 0;
-let ganhadorRodada;
+let ganhadorRodada = "";
 let soma_dos_palitos = 0;
 
 
@@ -58,9 +58,10 @@ function telaVencedor(){
 
 
 function reiniciaRodada(){
-    let indice = players.indexOf(ganhadorRodada);
-
-    players.splice(indice,1); // remove ganhador
+    if(ganhadorRodada !== ""){
+        let indice = players.indexOf(ganhadorRodada);
+        players.splice(indice,1); // remove ganhador
+    };
 
     jogadores = [];
     palpites_ver =[];
@@ -101,6 +102,7 @@ function exibeResult(){
             ganhadorRodada = x.nome;
         }
     });
+    //
 }
 
 
@@ -132,8 +134,9 @@ function capturaDados(){
     
 }
 function proximoJogador(){
+    let maxpalpite = state.values.n_players.value * state.values.n_palitos.value;
 
-    if(state.values.Jog_palpite.value >= 0 && state.values.Jog_palpite.value !== "" ){
+    if(state.values.Jog_palpite.value >= 0 && state.values.Jog_palpite.value != "" && state.values.Jog_palpite.value <= maxpalpite){
 
         state.values.Jog_palpite.value = "";
         state.values.jog_palitos.value = "";
@@ -146,20 +149,25 @@ function proximoJogador(){
     
     }else{
         state.values.Jog_palpite.value = "";
-        alert(`Informe um número entre 0 e ${state.values.n_players.value * state.values.n_palitos.value}`);
+        alert(`Informe um número entre 0 e ${maxpalpite}`);
+        exibeTelaPalpite();
     }
 
 }
 
+function exibeTelaPalpite(){
+    state.views.set_palito.style.display = "none";
+    state.views.set_palpite.style.display = "block";
+    state.views.proximo_btn.style.display = "block";
+    state.views.palpite_btn.style.display = "none";
+}
+
 function proximoPalpite(){
 
-    if(state.values.jog_palitos.value >=0 && state.values.jog_palitos.value <= state.values.n_palitos.value && state.values.jog_palitos.value !=="" ){
+    if(state.values.jog_palitos.value >= 0 && state.values.jog_palitos.value <= state.values.n_palitos.value && state.values.jog_palitos.value !="" ){
 
-        state.views.set_palito.style.display = "none";
-        state.views.set_palpite.style.display = "block";
-        state.views.proximo_btn.style.display = "block";
-        state.views.palpite_btn.style.display = "none";
-        // console.log(jogadores.length)
+        exibeTelaPalpite();
+
         if(jogadores.length === 0){
             carregaNomesPalpites("nao");
             
